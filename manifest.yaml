@@ -26,21 +26,19 @@ spec:
       containers:
       - name: mongodb
         image: 296062550816.dkr.ecr.us-east-1.amazonaws.com/suraj/dev/mongodb:1.0
-        ImagePullPolicy: Always
-      volumeMounts:
+        imagePullPolicy: Always # Corrected casing and indentation
+      volumeMounts: # Corrected indentation
       - name: mongodb
         mountPath: /data/db
-
-    volumeClaimTemplates:
-    - metadata:
-        name: mongodb
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: "suraj-sc"
-        resources:
-          requests:
-            storage: 5Gi
-
+  volumeClaimTemplates: # Corrected indentation
+  - metadata:
+      name: mongodb
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: "suraj-sc"
+      resources:
+        requests:
+          storage: 5Gi
 
 ---
 
@@ -49,7 +47,7 @@ kind: Service
 metadata:
   name: mongodb
   namespace: suraj
-  
+
 spec:
   clusterIP: None #headless service
   selector:
