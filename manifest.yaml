@@ -51,7 +51,7 @@ metadata:
   namespace: suraj
   
 spec:
-  clusterIp: None #headless service
+  clusterIP: None #headless service
   selector:
     project: suraj
     component: db
@@ -60,4 +60,4 @@ spec:
   - name: mongodb-port
     protocol: TCP
     port: 27017
-    containerPort: 27017
+    targetPort: 27017
