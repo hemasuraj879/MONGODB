@@ -26,11 +26,11 @@ spec:
       containers:
       - name: mongodb
         image: 296062550816.dkr.ecr.us-east-1.amazonaws.com/suraj/dev/mongodb:1.0
-        imagePullPolicy: Always # Corrected casing and indentation
-      volumeMounts: # Corrected indentation
-      - name: mongodb
-        mountPath: /data/db
-  volumeClaimTemplates: # Corrected indentation
+        imagePullPolicy: Always
+        volumeMounts: # Corrected indentation: inside 'containers'
+        - name: mongodb
+          mountPath: /data/db
+  volumeClaimTemplates:
   - metadata:
       name: mongodb
     spec:
