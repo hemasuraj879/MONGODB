@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Statefulset
+metadata:
+  name: mongodb
+  namespace: suraj
+  labels:
+    project: suraj
+    component: db
+    env: dev
+
+spec:
+  selector:
+    matchLabels:
+      project: suraj
+      component: db
+      env: dev
+    serviceName: "mongodb"
+    replicas: 3
+    template:
+      metadata:
+        labels:
+          project: suraj
+          component: db
+          env: dev
+      spec:
+        containers:
+        - name: mongodb
+          image:
+        volumeMounts:
+        - name: mongodb
+          mountPath: /data/db
+
+    volumeClaimTemplates:
+    - metadata:
+        name: mongodb
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: "suraj-sc"
+        resources:
+          requests:
+            storage: 5Gi
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: suraj
+  
+spec:
+  clusterIp: None #headless service
+  selector:
+    project: suraj
+    component: db
+    env: dev
+  ports:
+  - name: mongodb-port
+    protocol: TCP
+    port: 27017
+    containerPort: 27017
