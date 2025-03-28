@@ -14,22 +14,22 @@ spec:
       project: suraj
       component: db
       env: dev
-    serviceName: "mongodb"
-    replicas: 3
-    template:
-      metadata:
-        labels:
-          project: suraj
-          component: db
-          env: dev
-      spec:
-        containers:
-        - name: mongodb
-          image: 296062550816.dkr.ecr.us-east-1.amazonaws.com/suraj/dev/mongodb:1.0
-          ImagePullPolicy: Always
-        volumeMounts:
-        - name: mongodb
-          mountPath: /data/db
+  serviceName: "mongodb"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        project: suraj
+        component: db
+        env: dev
+    spec:
+      containers:
+      - name: mongodb
+        image: 296062550816.dkr.ecr.us-east-1.amazonaws.com/suraj/dev/mongodb:1.0
+        ImagePullPolicy: Always
+      volumeMounts:
+      - name: mongodb
+        mountPath: /data/db
 
     volumeClaimTemplates:
     - metadata:
